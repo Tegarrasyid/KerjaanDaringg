@@ -158,31 +158,38 @@ $totalBayar = $totalHarga - $discount;
         <!-- Daftar Produk -->
         <div class="col-md-8">
                 <?php foreach ($keranjangItems as $produk) { ?>
-                <div class="cart-item d-flex align-items-center justify-content-between">
-                    <input type="checkbox" name="pilih_keranjang[]" value="<?= $produk['id_keranjang'] ?>" class="form-check-input me-2" style="transform: scale(1.3);">
-                    <img src="image/<?php echo $produk['foto']; ?>" class="img-fluid rounded" width="150" alt="sepatu">
-                    <div class="ms-3">
-                        <p class="mb-1 fw-bold">Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?></p>
-                        <p class="mb-1"><?php echo $produk['nama']; ?></p>
-                        <p class="mb-1">Ukuran: <?php echo $produk['ukuran']; ?></p>
-                        <form method="post" class="d-flex align-items-center">
-                            <!-- Tombol kurang -->
-                            <button type="submit" name="kurang" class="btn btn-light qty-btn">-</button>
-                            <!-- Jumlah Produk -->
-                            <input type="text" value="<?php echo $produk['jumlah_produk']; ?>" class="form-control text-center mx-2" style="width: 50px;" readonly>
-                            <!-- Tombol tambah -->
-                            <button type="submit" name="tambah" class="btn btn-light qty-btn">+</button>
-                        </form>
-                    </div>
-                    <!-- Tombol Hapus -->
-                    <form method="post">
-                        <input type="hidden" name="id_keranjang" value="<?php echo $produk['id_keranjang']; ?>">
-                        <button type="submit" name="hapus" class="btn delete-btn"><i class="fa-solid fa-trash-can"></i> Hapus</button>
-                    </form>
-                </div>
-                <?php } ?>
+<form method="post">
+    <div class="cart-item d-flex align-items-center justify-content-between">
+        <!-- Checkbox -->
+        <input type="checkbox" name="pilih_keranjang[]" value="<?= $produk['id_keranjang'] ?>" class="form-check-input me-2" style="transform: scale(1.3);">
 
-                
+        <!-- Gambar -->
+        <img src="image/<?= $produk['foto']; ?>" class="img-fluid rounded" width="150" alt="sepatu">
+
+        <!-- Detail Produk -->
+        <div class="ms-3 flex-grow-1">
+            <p class="mb-1 fw-bold">Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></p>
+            <p class="mb-1"><?= $produk['nama']; ?></p>
+            <p class="mb-1">Ukuran: <?= $produk['ukuran']; ?></p>
+
+            <!-- Tombol Jumlah -->
+            <div class="d-flex align-items-center mt-2">
+                <input type="hidden" name="id_keranjang" value="<?= $produk['id_keranjang']; ?>">
+                <input type="hidden" name="jumlah" value="<?= $produk['jumlah_produk']; ?>">
+                <button type="submit" name="kurang" class="btn btn-light qty-btn">-</button>
+                <input type="text" value="<?= $produk['jumlah_produk']; ?>" class="form-control text-center mx-2" style="width: 50px;" readonly>
+                <button type="submit" name="tambah" class="btn btn-light qty-btn">+</button>
+            </div>
+        </div>
+
+        <!-- Tombol Hapus -->
+        <div class="ms-3">
+            <button type="submit" name="hapus" class="btn delete-btn"><i class="fa-solid fa-trash-can"></i> Hapus</button>
+        </div>
+    </div>
+</form>
+<?php } ?>
+
         </div>
 
         <!-- Ringkasan Belanja -->
@@ -219,4 +226,3 @@ $totalBayar = $totalHarga - $discount;
 </script>
 </body>
 </html>
-
